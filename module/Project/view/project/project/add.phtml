@@ -1,4 +1,5 @@
 <?php
+use Zend\Form\Element;
 // module/Album/view/album/album/add.phtml:
 
 $title = 'Add new project';
@@ -6,10 +7,17 @@ $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php
+echo $master;
+$master1 = new Element('master');
+$master1->setAttributes(array(
+		'type'  => 'number'
+));
+$master1->setValue($master);
+
 $form = $this->form;
 $form->setAttribute('action', $this->url('project', array('action' => 'add')));
 $form->prepare();
-
+$form->add($master1);
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
 echo $this->formlabel($form->get('name'));
@@ -22,4 +30,5 @@ echo $this->formlabel($form->get('enddate'));
 echo $this->formdate($form->get('enddate'));
 echo $this->formSubmit($form->get('submit'));
 echo $this->formHidden($form->get('type'));
+echo $this->formHidden($form->get('master'));
 echo $this->form()->closeTag();

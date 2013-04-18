@@ -1,7 +1,7 @@
 <?php
 // module/Album/view/album/album/edit.phtml:
 
-$title = 'Project';
+$title = $this->escapeHtml($project->name);
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
@@ -11,23 +11,26 @@ $form = $this->form;
 $form->setAttribute('action', $this->url(
     'project',
     array(
-        'action' => 'show',
-        'id'     => $this->id,
+        'action' => 'index',
+        'id'     => $this->id
     )
 ));
 $form->prepare();
-
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
-echo $this->formlabel($form->get('name'));
+//echo var_dump($project);
 ?>
-<h3><?php echo $form->get('name')->getValue(); ?></h3> 
-<?php
-echo $this->formlabel($form->get('description'));
-echo $this->formtextarea($form->get('description')->setAttribute('disabled',true));
-echo $this->formlabel($form->get('startdate'));
-echo $this->formdate($form->get('startdate'));
-echo $this->formlabel($form->get('enddate'));
-echo $this->formdate($form->get('enddate'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+<a href="<?php echo $this->url('project',
+            array('action'=>'add', 'id' => $this->id));?>">add Project</a>
+<hr>
+<p style="font-size: 1.5em"><?php echo "Description"; ?></p>
+<?php echo $this->escapeHtml($project->description); ?>
+<br />
+<br />
+<p style="font-size: 1.3em"><?php echo "Start date"; ?></p>
+<?php echo $this->formdate($form->get('startdate')); ?>
+<p style="font-size: 1.3em"><?php echo "End date"; ?></p>
+<?php echo $this->formdate($form->get('enddate')); ?>
+<br />
+<?php echo $this->formSubmit($form->get('submit')); ?>
+<?php echo $this->form()->closeTag(); ?>

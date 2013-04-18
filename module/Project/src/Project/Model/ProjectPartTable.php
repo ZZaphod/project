@@ -37,7 +37,8 @@ class ProjectPartTable
 				'description'  => $projectPart->description,
 		        'startdate'  => $projectPart->startdate,
 		        'enddate'  => $projectPart->enddate,
-		        'type' => $projectPart->type
+		        'type' => $projectPart->type,
+		        'master' => $projectPart->master
 		);
 
 		$id = (int)$projectPart->id;

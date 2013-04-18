@@ -41,11 +41,13 @@ class ProjectController extends AbstractActionController
      return array(
      		'id' => $id,
      		'form' => $form,
+            'project' => $project
      );
  }
     
  public function addAction()
     {
+        $master = (int) $this->params()->fromRoute('id', 0);
         $form = new ProjectForm();
         $form->get('submit')->setValue('Add');
 
@@ -54,16 +56,14 @@ class ProjectController extends AbstractActionController
             $project = new Project();
             $form->setInputFilter($project->getInputFilter());
             $form->setData($request->getPost());
-
             if ($form->isValid()) {
                 $project->exchangeArray($form->getData());
                 $this->getProjectTable()->saveProjectPart($project);
 
-                // Redirect to list of albums
                 return $this->redirect()->toRoute('project');
             }
         }
-        return array('form' => $form);
+        return array('form' => $form, 'master' => $master);
     }
     
 public function editAction()

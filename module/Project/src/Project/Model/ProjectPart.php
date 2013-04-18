@@ -25,6 +25,7 @@ class ProjectPart
     public $progress;
     public $elementstaus;
     public $type;
+    public $master;
     
     protected $inputFilter;
 
@@ -52,6 +53,7 @@ class ProjectPart
         $this->progress = (isset($data['progress'])) ? $data['progress'] : null;
         $this->elementstatus = (isset($data['elementstatus'])) ? $data['elementstatus'] : null;
         $this->type = (isset($data['type'])) ? $data['type'] : null;
+        $this->master = (isset($data['master'])) ? $data['master'] : null;
     }
     
     public function getArrayCopy()
@@ -67,6 +69,14 @@ class ProjectPart
     
     		$inputFilter->add($factory->createInput(array(
     				'name'     => 'id',
+    				'required' => true,
+    				'filters'  => array(
+    						array('name' => 'Int'),
+    				),
+    		)));
+    		
+    		$inputFilter->add($factory->createInput(array(
+    				'name'     => 'master',
     				'required' => true,
     				'filters'  => array(
     						array('name' => 'Int'),

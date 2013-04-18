@@ -17,6 +17,12 @@ class ProjectForm extends Form
             ),
         ));
         $this->add(array(
+        		'name' => 'master',
+        		'attributes' => array(
+        				'type'  => 'hidden',
+        		),
+        ));
+        $this->add(array(
             'name' => 'name',
             'attributes' => array(
                 'type'  => 'text',
@@ -41,6 +47,7 @@ class ProjectForm extends Form
         		),
         		'options' => array(
         				'label' => 'Startdate',
+        		        'format' => 'd.m.Y'
         		),
         ));
         $this->add(array(
@@ -50,6 +57,7 @@ class ProjectForm extends Form
         		),
         		'options' => array(
         				'label' => 'Enddate',
+        		        'format' => 'd.m.Y'
         		),
         ));
          $this->add(array(
