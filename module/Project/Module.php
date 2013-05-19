@@ -56,15 +56,26 @@ class Module implements AutoloaderProviderInterface
     						$resultSetPrototype->setArrayObjectPrototype(new Project());
     						return new TableGateway('projectpart', $dbAdapter, null, $resultSetPrototype);
     					},
+    					'Project\Model\ProjectTable' =>  function($sm) {
+    						$tableGateway = $sm->get('ProjectTableGateway');
+    						$table = new ProjectTable($tableGateway);
+    						return $table;
+    					},
+    					'projectTableGateway' => function ($sm) {
+    						$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+    						$resultSetPrototype = new ResultSet();
+    						$resultSetPrototype->setArrayObjectPrototype(new Project());
+    						return new TableGateway('project', $dbAdapter, null, $resultSetPrototype);
+    					},
     					'Project\Model\workpackageTable' =>  function($sm) {
-    						$tableGateway = $sm->get('workpackageTableGateway');
-    						$table = new workpackageTable($tableGateway);
+    						$tableGateway = $sm->get('ProjectPartTableGateway');
+    						$table = new WorkpackageTable($tableGateway);
     						return $table;
     					},
     					'workpackageTableGateway' => function ($sm) {
     						$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
     						$resultSetPrototype = new ResultSet();
-    						$resultSetPrototype->setArrayObjectPrototype(new workpackage());
+    						$resultSetPrototype->setArrayObjectPrototype(new Workpackage());
     						return new TableGateway('workpackage', $dbAdapter, null, $resultSetPrototype);
     					},
     			),

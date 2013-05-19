@@ -6,7 +6,7 @@ $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
-    <a href="<?php echo $this->url('workpackage', array('action'=>'add'));?>">Add new workpackages</a>
+    <a href="<?php echo $this->url('workpackage', array('action'=>'add'));?>">Add new packages</a>
 </p>
 
 <table class="table">
@@ -15,15 +15,15 @@ $this->headTitle($title);
     <th>Description</th>
     <th>&nbsp;</th>
 </tr>
-<?php foreach ($workpackages as $workpackage) : ?>
+<?php foreach ($projectparts as $workpackage) : ?>
 <tr>
-    <td><?php echo $this->escapeHtml($workpackages->name);?></td>
-    <td><?php echo $this->escapeHtml($workpackages->description);?></td>
+    <td><?php echo $this->escapeHtml($workpackage->name);?></td>
+    <td><?php echo $this->escapeHtml($workpackage->description);?></td>
     <td>
         <a href="<?php echo $this->url('workpackage',
-            array('action'=>'edit', 'id' => $workpackages->id));?>">Edit</a>
+            array('action'=>'edit', 'id' => $workpackage->id));?>">Edit</a>
         <a href="<?php echo $this->url('workpackage',
-            array('action'=>'delete', 'id' => $workpackages->id));?>">Delete</a>
+            array('action'=>'delete', 'id' => $workpackage->id));?>">Delete</a>
     </td>
 </tr>
 <?php endforeach; ?>

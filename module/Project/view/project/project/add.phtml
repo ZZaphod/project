@@ -14,10 +14,18 @@ $master1->setAttributes(array(
 ));
 $master1->setValue($master);
 
+$type = new Element('type');
+$type->setAttributes(array(
+		'type'  => 'text'
+));
+$type->setValue('project');
+
 $form = $this->form;
 $form->setAttribute('action', $this->url('project', array('action' => 'add')));
 $form->prepare();
 $form->add($master1);
+$form->add($type);
+
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
 echo $this->formlabel($form->get('name'));

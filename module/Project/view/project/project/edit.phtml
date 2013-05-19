@@ -19,6 +19,7 @@ $form->prepare();
 
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
+echo $this->formHidden($form->get('master'));
 echo $this->formlabel($form->get('name'));
 echo $this->formtext($form->get('name'));
 echo $this->formlabel($form->get('description'));

@@ -2,8 +2,9 @@
 namespace Project\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Sql;
 
-class ProjectPartTable
+class ProjectpartTable
 {
 	protected $tableGateway;
 
@@ -12,9 +13,9 @@ class ProjectPartTable
 		$this->tableGateway = $tableGateway;
 	}
 
-	public function fetchAll()
+	public function fetchAll($type = 'project')
 	{
-		$resultSet = $this->tableGateway->select();
+		$resultSet = $this->tableGateway->select(array('type' => $type));
 		return $resultSet;
 	}
 
@@ -56,6 +57,25 @@ class ProjectPartTable
 	public function deleteProjectPart($id)
 	{
 		$this->tableGateway->delete(array('id' => $id));
+	}
+	
+	public function getChildren($id) {
+	    $children = array();
+	    $adapter = $this->tableGateway->getAdapter();
+		$sql = new Sql($adapter);
+        $select = $sql->select();
+	    $select->from('projectpart');
+	   // $select->join('projectpart', 'projectpart.id = projectpart.master');
+	    
+	    $select->where(array('master' => $id));
+	    $selectString = $sql->getSqlStringForSqlObject($select);
+        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        
+        foreach ($results as $result) {
+        	$children[] = $this->getProjectPart($result->id);
+        }
+	    
+	    return $children;
 	}
 
 }

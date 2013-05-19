@@ -1,7 +1,7 @@
 <?php
 // module/Album/view/album/album/edit.phtml:
 
-$title = $this->escapeHtml($project->name);
+$title = $this->escapeHtml($projectpart->name);
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
@@ -15,16 +15,35 @@ $form->setAttribute('action', $this->url(
         'id'     => $this->id
     )
 ));
+?>
+<table style="border: solid;">
+    <tr><th>name</th></tr>
+    <?php
+    foreach ($children as $child) {
+        ?>
+        <tr><td>
+        <?php
+        echo $child->name;	
+    }
+    ?>
+    </td></tr>
+</table>
+<?php
 $form->prepare();
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
 //echo var_dump($project);
 ?>
+<p>add to this project: </p>
 <a href="<?php echo $this->url('project',
-            array('action'=>'add', 'id' => $this->id));?>">add Project</a>
+            array('action'=>'add', 'id' => $this->id));?>">project</a>
+<span> | </span>
+<a href="<?php echo $this->url('workpackage',
+            array('action'=>'add', 'id' => $this->id));?>">package</a>
 <hr>
+
 <p style="font-size: 1.5em"><?php echo "Description"; ?></p>
-<?php echo $this->escapeHtml($project->description); ?>
+<?php echo $this->escapeHtml($projectpart->description); ?>
 <br />
 <br />
 <p style="font-size: 1.3em"><?php echo "Start date"; ?></p>

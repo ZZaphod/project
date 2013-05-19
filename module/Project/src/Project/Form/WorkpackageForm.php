@@ -35,6 +35,32 @@ class WorkpackageForm extends Form
         		),
         ));
         $this->add(array(
+        		'name' => 'startdate',
+        		'attributes' => array(
+        				'type'  => 'date',
+        		),
+        		'options' => array(
+        				'label' => 'Startdate',
+        				'format' => 'd.m.Y'
+        		),
+        ));
+        $this->add(array(
+        		'name' => 'enddate',
+        		'attributes' => array(
+        				'type'  => 'date',
+        		),
+        		'options' => array(
+        				'label' => 'Enddate',
+        				'format' => 'd.m.Y'
+        		),
+        ));
+        $this->add(array(
+        		'name' => 'type',
+        		'attributes' => array(
+        				'type'  => 'hidden'
+        		)
+        ));
+        $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',

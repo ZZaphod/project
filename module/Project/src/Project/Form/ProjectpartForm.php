@@ -3,7 +3,7 @@ namespace Project\Form;
 
 use Zend\Form\Form;
 
-class ProjectPartForm extends Form
+class ProjectpartForm extends Form
 {
     public function __construct($name = null)
     {
@@ -64,7 +64,6 @@ class ProjectPartForm extends Form
         		'name' => 'type',
         		'attributes' => array(
         				'type'  => 'hidden',
-        				'value' => 'project',
         		),
         ));
         $this->add(array(
