@@ -1,0 +1,40 @@
+<?php
+use Zend\Form\Element;
+
+$title = 'Add new package';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+echo $master;
+$master1 = new Element('master');
+$master1->setAttributes(array(
+		'type'  => 'number'
+));
+$master1->setValue($master);
+
+$type = new Element('type');
+$type->setAttributes(array(
+		'type'  => 'text'
+));
+$type->setValue('workpackage');
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('workpackage', array('action' => 'add')));
+$form->prepare();
+$form->add($master1);
+$form->add($type);
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formlabel($form->get('name'));
+echo $this->formtext($form->get('name'));
+echo $this->formlabel($form->get('description'));
+echo $this->formtextarea($form->get('description'));
+echo $this->formlabel($form->get('startdate'));
+echo $this->formdate($form->get('startdate'));
+echo $this->formlabel($form->get('enddate'));
+echo $this->formdate($form->get('enddate'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->formHidden($form->get('type'));
+echo $this->formHidden($form->get('master'));
+echo $this->form()->closeTag();
